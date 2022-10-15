@@ -6,7 +6,7 @@ const People = (props) => {
         <>
             {list.map((person) => {
                 return (
-                    <div className="card">
+                    <div key={person.id} className="card">
                         <img src={person.image} alt="" />
                         <div>
                             <h3>{person.name}</h3>

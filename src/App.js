@@ -7,23 +7,22 @@ function App() {
     const [list, setList] = useState(data.slice(0, 5));
     const [index, setIndex] = useState(0);
 
-    console.log(data.length);
+    // console.log(data.length);
     const previous = () => {
-        let newIndex = index - 5;
-        if (index >= 5) {
-            setIndex(index - 5);
-            setList(data.slice(index - 5, index));
-        }
+        let tempIndex = index - 5;
+        tempIndex < 0 && (tempIndex = data.length - 1);
+        setList(data.slice(tempIndex - 5, tempIndex));
+        setIndex(tempIndex);
     };
+    console.log(index);
     const next = () => {
-        if (index > data.length - 1) {
-            setIndex(0);
-        }
-        setList(data.slice(index, index + 5));
-        setIndex(index + 5);
-        console.log(index);
-        console.log(list.length);
+        let tempIndex = index + 5;
+        tempIndex > data.length - 1 && (tempIndex = 0);
+        setList(data.slice(tempIndex, tempIndex + 5));
+        setIndex(tempIndex);
     };
+    console.log(list);
+    console.log(index);
     return (
         <main>
             <div className="container">
@@ -32,10 +31,10 @@ function App() {
                     Employee list: {index + 1} to {index + 5}
                 </p>
                 <People list={list} />
-                <button onClick={() => previous()} className="previous">
+                <button onClick={previous} className="previous">
                     Previous
                 </button>
-                <button onClick={() => next()} className="next">
+                <button onClick={next} className="next">
                     next
                 </button>
             </div>
